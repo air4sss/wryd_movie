@@ -12,9 +12,15 @@
 
 ## 기술 아키텍쳐
 
-| 프로그래밍 언어 | 프레임워크 | 데이터베이스 | 프론트엔드 | API | 버전 관리 | 배포 환경 |
-|----------------|-----------|--------------|-------------|-----|----------|----------|
-| <img src="https://www.python.org/static/community_logos/python-logo.png" alt="Python" width="20"/> Python | <img src="https://static.djangoproject.com/img/logos/django-logo-negative.png" alt="Django" width="20"/> Django | <img src="https://upload.wikimedia.org/wikipedia/commons/9/97/Sqlite-square-icon.svg" alt="SQLite" width="20"/> SQLite | <img src="https://upload.wikimedia.org/wikipedia/commons/6/61/HTML5_logo_and_wordmark.svg" alt="HTML" width="20"/> HTML, <img src="https://upload.wikimedia.org/wikipedia/commons/d/d5/CSS3_logo_and_wordmark.svg" alt="CSS" width="20"/> CSS, <img src="https://upload.wikimedia.org/wikipedia/commons/6/6a/JavaScript-logo.png" alt="JavaScript" width="20"/> JavaScript, <img src="https://upload.wikimedia.org/wikipedia/commons/b/b2/Bootstrap_logo.svg" alt="Bootstrap" width="20"/> Bootstrap | <img src="https://www.themoviedb.org/assets/2/v4/logos/blue_square_1-7b254b764b2cdbd018e83b57e777da41e292cadc1ec20c2c12e8374ab46b4b2c.svg" alt="TMDb API" width="20"/> TMDb (The Movie Database) API | <img src="https://git-scm.com/images/logos/downloads/Git-Logo-2Color.png" alt="Git" width="20"/> Git, <img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" alt="GitHub" width="20"/> GitHub | 로컬 서버, 가능 시 클라우드 서버 |
+| 카테고리      | 기술                                                                                                                                                 |
+|----------------|------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **프로그래밍 언어** | <img src="https://www.python.org/static/community_logos/python-logo.png" alt="Python" width="20"/> Python <br> <img src="https://upload.wikimedia.org/wikipedia/commons/6/6a/JavaScript-logo.png" alt="JavaScript" width="20"/> JavaScript |
+| **프레임워크** | <img src="https://static.djangoproject.com/img/logos/django-logo-negative.png" alt="Django" width="20"/> Django                                      |
+| **데이터베이스** | <img src="https://upload.wikimedia.org/wikipedia/commons/9/97/Sqlite-square-icon.svg" alt="SQLite" width="20"/> SQLite                             |
+| **프론트엔드**  | <img src="https://upload.wikimedia.org/wikipedia/commons/6/61/HTML5_logo_and_wordmark.svg" alt="HTML" width="20"/> HTML <br> <img src="https://upload.wikimedia.org/wikipedia/commons/d/d5/CSS3_logo_and_wordmark.svg" alt="CSS" width="20"/> CSS <br> <img src="https://upload.wikimedia.org/wikipedia/commons/6/6a/JavaScript-logo.png" alt="JavaScript" width="20"/> JavaScript <br> <img src="https://upload.wikimedia.org/wikipedia/commons/b/b2/Bootstrap_logo.svg" alt="Bootstrap" width="20"/> Bootstrap |
+| **API**        | <img src="https://www.themoviedb.org/assets/2/v4/logos/blue_square_1-7b254b764b2cdbd018e83b57e777da41e292cadc1ec20c2c12e8374ab46b4b2c.svg" alt="TMDb API" width="20"/> TMDb (The Movie Database) API |
+| **버전 관리**   | <img src="https://git-scm.com/images/logos/downloads/Git-Logo-2Color.png" alt="Git" width="20"/> Git <br> <img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" alt="GitHub" width="20"/> GitHub |
+| **배포 환경**   | 로컬 서버, 가능 시 클라우드 서버                                                                                                                   |
 
 ## 주요 기능 & 기술
 
