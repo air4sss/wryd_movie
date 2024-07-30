@@ -1,6 +1,6 @@
 # wryd_movie
 
-![Project Logo](https://via.placeholder.com/150)
+![Project Logo]([https://via.placeholder.com/150](https://github.com/air4sss/wryd_movie/blob/main/logo_rmbg.jpg))
 
 ![Build Status](https://img.shields.io/badge/build-passing-brightgreen)
 
@@ -18,7 +18,7 @@
 | **프레임워크** | <img src="https://static.djangoproject.com/img/logos/django-logo-negative.png" alt="Django" width="20"/> Django                                      |
 | **데이터베이스** | <img src="https://upload.wikimedia.org/wikipedia/commons/9/97/Sqlite-square-icon.svg" alt="SQLite" width="20"/> SQLite                             |
 | **프론트엔드**  | <img src="https://upload.wikimedia.org/wikipedia/commons/6/61/HTML5_logo_and_wordmark.svg" alt="HTML" width="20"/> HTML <br> <img src="https://upload.wikimedia.org/wikipedia/commons/d/d5/CSS3_logo_and_wordmark.svg" alt="CSS" width="20"/> CSS <br> <img src="https://upload.wikimedia.org/wikipedia/commons/6/6a/JavaScript-logo.png" alt="JavaScript" width="20"/> JavaScript <br> <img src="https://upload.wikimedia.org/wikipedia/commons/b/b2/Bootstrap_logo.svg" alt="Bootstrap" width="20"/> Bootstrap |
-| **API**        | <img src="https://www.themoviedb.org/assets/2/v4/logos/blue_square_1-7b254b764b2cdbd018e83b57e777da41e292cadc1ec20c2c12e8374ab46b4b2c.svg" alt="TMDb API" width="20"/> TMDb (The Movie Database) API |
+| **API**        | TMDb (The Movie Database) API |
 | **버전 관리**   | <img src="https://git-scm.com/images/logos/downloads/Git-Logo-2Color.png" alt="Git" width="20"/> Git <br> <img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" alt="GitHub" width="20"/> GitHub |
 | **배포 환경**   | 로컬 서버, 가능 시 클라우드 서버                                                                                                                   |
 
@@ -43,8 +43,4 @@
 - SQLite를 사용한 사용자 및 영화 데이터 저장 및 관리
 
 ## Figma 기반 목업 겸 슬라이드 쇼
-[여기서 확인하세요](https://www.figma.com/proto/cE301JyFV9TMe70OFZq96A/Wireframe?node-id=10-1624&t=i1KRaJX7Q5vgMXrC-1)
-
----
-
-![Footer Image](https://via.placeholder.com/150)
+[여기서 확인하세요 🤩](https://www.figma.com/proto/cE301JyFV9TMe70OFZq96A/Wireframe?node-id=10-1624&t=i1KRaJX7Q5vgMXrC-1)
