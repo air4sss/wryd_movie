@@ -1,0 +1,381 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>영화 검색</title>
+    <script src="https://www.youtube.com/iframe_api"></script>
+    <style>
+        * {
+          box-sizing: border-box;
+        }
+        .search_container {
+            margin: auto;
+            transition: opacity 0.5s ease-in-out;
+        }
+        .container {
+            height : 70vh;
+            overflow-y: auto;
+            padding: 20px;
+        }
+        ul {
+            padding-bottom: 20px;
+            display: flex;
+            text-decoration: none;
+            flex-wrap: wrap;
+            list-style: none;
+        }
+        li {
+            flex: 1 1 200px;
+            margin: 10px;
+            background: #f0f0f0;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        :root {
+            --card-height: 345px;
+            --card-width: 230px;
+        }
+
+        body {
+          width: 100vw;
+            height: 100vh;
+            transition: background 2s ease;
+            padding-bottom: 20px;
+            background: 
+                linear-gradient(rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.2)), /* 투명도 레이어 */
+                url("https://source.unsplash.com/1600x900/?movie,cinema");
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            background-color: aliceblue;
+            margin: 0;
+        }
+
+        .youtube-video {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: none;
+            pointer-events: none;
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+        }
+
+        .card {
+          width: var(--card-width);
+          height: var(--card-height);
+          position: relative;
+          display: flex;
+          justify-content: center;
+          align-items: flex-end;
+          padding: 0 36px;
+          perspective: 2500px;
+          margin: 50px 50px;
+            transition: opacity 0.5s ease-in-out;
+        }
+
+        .wrapper {
+            transition: all 0.5s;
+            position: absolute;
+            width: 100%;
+            z-index: -1;
+        }
+
+        .card:hover .wrapper {
+            transform: perspective(900px) translateY(-5%) rotateX(25deg) translateZ(0);
+            box-shadow: 2px 35px 32px -8px rgba(0, 0, 0, 0.75);
+            -webkit-box-shadow: 2px 35px 32px -8px rgba(0, 0, 0, 0.75);
+            -moz-box-shadow: 2px 35px 32px -8px rgba(0, 0, 0, 0.75);
+        }
+
+        .wrapper::before,
+        .wrapper::after {
+          content: "";
+          opacity: 0;
+          width: 100%;
+          height: 80px;
+          transition: all 0.5s;
+          position: absolute;
+          left: 0;
+          border-radius: 20px;
+        }
+        .wrapper::before {
+          top: 0;
+          height: 100%;
+          background-image: linear-gradient(
+            to top,
+            transparent 46%,
+            rgba(12, 13, 19, 0.5) 68%,
+            rgba(12, 13, 19) 97%
+          );
+        }
+        .wrapper::after {
+          bottom: 0;
+          opacity: 1;
+          background-image: linear-gradient(
+            to bottom,
+            transparent 46%,
+            rgba(12, 13, 19, 0.5) 68%,
+            rgba(12, 13, 19) 97%
+          );
+        }
+
+        .card:hover .wrapper::before,
+        .wrapper::after {
+          opacity: 1;
+        }
+
+        .card:hover .wrapper::after {
+          height: 120px;
+        }
+
+
+
+        .character {
+          width: 100%;
+            height: 50%;
+          opacity: 0;
+          transition: all 0.5s;
+          position: absolute;
+          z-index: -1;
+        }
+
+        .card:hover .character {
+          opacity: 1;
+            border-radius: 15px;
+            width: 240px;
+            height: 135px;
+          transform: translate3d(0%, -50%, 100px);
+        }
+        .search_container {
+          text-align: center;
+          color: white;
+          width: 700px;
+          height: 200px;
+          position: sticky;
+            display: flex;
+          align-items: center;
+          flex-direction: column;
+        }
+        form {
+          transition: all 0.5s;
+          position: absolute;
+          top: 50%;
+          transform: translateY(-50%);
+        }
+
+        .finder {
+          border: 1px solid #fff;
+          background-color: black;
+          border-radius: 15px;
+          padding: 8px;
+          box-shadow: 9px 9px 16px rgba(0, 0, 0, 0.6), -9px -9px 16px rgba(0, 0, 0, 0.5);
+        }
+
+        .finder__outer {
+          display: flex;
+          width: 600px;
+          padding: 1.5rem 2rem;
+          border-radius: 10px;
+          box-shadow: inset 10px 10px 15px -10px #c3c3c3, inset -10px -10px 15px -10px #ffffff;
+        }
+
+        .finder__inner {
+          display: flex;
+          align-items: center;
+          position: relative;
+          flex: 1;
+            color: white;
+        }
+
+
+        .finder__input {
+          height: calc(100% + 3rem);
+            color: white;
+          border: none;
+          background-color: transparent;
+          outline: none;
+          font-size: 1.5rem;
+          letter-spacing: 0.75px;
+        }
+
+        .finder__icon {
+          width: 40px;
+          height: 40px;
+          margin-right: 1rem;
+          transition: all 0.2s;
+          box-shadow: inset 0 0 0 20px #292929;
+          border-radius: 50%;
+          position: relative;
+        }
+        .finder__icon:after, .finder__icon:before {
+          display: block;
+          content: "";
+          position: absolute;
+          transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+        .finder__icon:after {
+          width: 10px;
+          height: 10px;
+          background-color: #292929;
+          border: 3px solid #f6f5f0;
+          top: 50%;
+          position: absolute;
+          transform: translateY(-50%);
+          left: 0px;
+          right: 0;
+          margin: auto;
+          border-radius: 50%;
+        }
+        .active .finder__icon:after {
+          border-width: 10px;
+          background-color: #f6f5f0;
+        }
+        .finder__icon:before {
+          width: 4px;
+          height: 13px;
+          background-color: #f6f5f0;
+          top: 50%;
+          left: 20px;
+          transform: rotateZ(45deg) translate(-50%, 0);
+          transform-origin: 0 0;
+          border-radius: 4px;
+        }
+        .active .finder__icon:before {
+          background-color: #292929;
+          width: 6px;
+          transform: rotateZ(45deg) translate(-50%, 25px);
+        }
+        .processing .finder__icon {
+          transform-origin: 50%;
+          animation: spinner 0.3s linear infinite;
+          animation-delay: 0.5s;
+        }
+        .active .finder__icon {
+          transform: translateY(-5px);
+        }
+
+        @keyframes spinner {
+          0% {
+            transform: rotateZ(45deg);
+          }
+          100% {
+            transform: rotateZ(405deg);
+          }
+        }
+        .cover-image {
+          height: 345px;
+          width: 230px;
+          border-radius: 20px;
+        }
+
+    </style>
+</head>
+
+<body>
+    <div class="youtube-video" id="player"></div>
+    <div class="container">
+        {% if movies %}
+        <ul class="results-list">
+            {% for movie in movies %}
+                {% comment %} <a href="{% url 'movie_reviews' movie.poster_path %}" alt="Mythrill" target="_blank"> {% endcomment %}
+                <a href="{% url 'get_movie_info' movie.id %}" alt="Mythrill">
+                <div class="card">
+                    <div class="wrapper">
+                        <img src="https://image.tmdb.org/t/p/w1280{{ movie.poster_path }}" class="cover-image" />
+                    </div>
+                    <img src="https://image.tmdb.org/t/p/w1280{{ movie.backdrop_path }}" class="character" data-video-url="{{ movie.youtube_url }}"/>
+                </div>
+                </a>
+{#            <li class="result-item">{{ movie.title }} ({{ movie.year }}) - <a href="{% url 'movie_reviews' movie.link %}">recommendation!</a></li>#}
+            {% empty %}
+            <li class="result-item-none">검색 결과가 없습니다.</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        <script>
+          
+          document.addEventListener('DOMContentLoaded', (event) => {
+          const cards = document.querySelectorAll('.card');
+          const youtubeVideo = document.createElement('iframe');
+          const searchContainer = document.querySelector('.search_container');
+          youtubeVideo.classList.add('youtube-video');
+          youtubeVideo.id = 'player';
+          youtubeVideo.allow = 'autoplay; encrypted-media';
+          youtubeVideo.frameBorder = '0';
+          youtubeVideo.allowFullscreen = true;
+          document.body.appendChild(youtubeVideo);
+
+    let hideTimeout;
+
+    function showVideo(url) {
+        clearTimeout(hideTimeout);
+        youtubeVideo.src = url + "&autoplay=1";
+        youtubeVideo.style.display = 'block';
+        youtubeVideo.style.opacity = '1';
+        cards.forEach(card => {
+            card.style.opacity = '0.7';
+        });
+        searchContainer.style.opacity = '0.7';
+    }
+
+    function hideVideo() {
+        youtubeVideo.style.opacity = '0';
+        hideTimeout = setTimeout(() => {
+            youtubeVideo.style.display = 'none';
+            youtubeVideo.src = ""; // 비디오 정지 효과
+            cards.forEach(card => {
+                card.style.opacity = '1';
+            });
+            searchContainer.style.opacity = '1';
+        }, 500); // opacity transition 시간과 동일하게 설정
+    }
+
+    cards.forEach(card => {
+        const videoUrl = card.querySelector('.character').getAttribute('data-video-url');
+        console.log(videoUrl)
+        if (videoUrl) {
+            card.addEventListener('mouseenter', () => showVideo(videoUrl + "&volume=50"));
+            card.addEventListener('mouseleave', hideVideo);
+        }
+    });
+
+    const coverImages = document.querySelectorAll('.cover-image');
+    coverImages.forEach(image => {
+        const characterImage = image.closest('.card').querySelector('.character');
+        const videoUrl = characterImage.getAttribute('data-video-url');
+        if (videoUrl) {
+            image.addEventListener('mouseenter', () => showVideo(videoUrl + "&volume=50"));
+            image.addEventListener('mouseleave', hideVideo);
+        }
+    });
+});
+
+        </script>
+        <script>
+            const input = document.querySelector(".finder__input");
+const finder = document.querySelector(".finder");
+const form = document.querySelector("form");
+
+input.addEventListener("focus", () => {
+  finder.classList.add("active");
+});
+
+input.addEventListener("blur", () => {
+  if (input.value.length === 0) {
+    finder.classList.remove("active");
+  }
+});
+        </script>
+    
+        {% if error %}
+        <p class="error-message">{{ error }}</p>
+        {% endif %}
+    </div>
+</body>
+</html>

@@ -1,0 +1,370 @@
+
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>CodePen - UI Kit | Blog Component 1</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<base href="#">
+<!-- Link the Font-File -->
+<link rel="stylesheet" href="https://use.typekit.net/stp3dni.css">
+<script src="https://kit.fontawesome.com/a3dc88dac3.js" crossorigin="anonymous"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+<link rel="stylesheet" href="./style.css">
+  <style>
+    /* ------------- */
+    /* Basic Setting */
+    /* ------------- */
+
+    html,
+    body {
+        box-sizing: border-box;
+        font-family: 'neuzeit-grotesk', sans-serif;
+        font-weight: 300;
+        font-style: normal;
+        font-size: 1em;
+        line-height: 1.5;
+        scroll-behavior: smooth;
+    }
+
+    *, *::before, *::after {
+        box-sizing: inherit;
+    }
+
+    main {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 100vh;
+        min-height: 640px;
+        background-color: #d1e8ee;
+        background-image: url('https://image.tmdb.org/t/p/w1280{{ movies.backdrop_path }}');
+        background-repeat: no-repeat;
+        background-position: 50% 10%;
+        background-size: 60%;
+    }
+
+    h2 {
+        margin-top: 20px;
+        font-size: 3em;
+        font-weight: 700;
+        line-height: 1;
+    }
+
+    p {
+        margin-top: 20px;
+        font-size: 1em;
+        color: #7B8591;
+    }
+
+    ::-moz-selection {
+        color: #fff;
+        background-color: #005AEE;
+    }
+
+    ::selection {
+        color: #fff;
+        background-color: #005AEE;
+    }
+
+    /* ======================== */
+    /* Just Copy The Code Below */
+
+    /* ------------- */
+    /* Content Style */
+    /* ------------- */
+
+    .main-card {
+        position: relative;
+        width: 770px;
+        height: 470px;
+        margin: 20px;
+        border-radius: 10px;
+        font-family: 'neuzeit-grotesk', sans-serif;
+        font-weight: 300;
+        font-style: normal;
+        font-size: 1em;
+        line-height: 1.5;
+        color: #303336;
+        background-color: #fff;
+        box-shadow: 0 40px 40px -20px #8fc7d544;
+    }
+
+    .main-card .card-content {
+        position: relative;
+        display: flex;
+        height: 100%;
+        padding: 50px;
+    }
+
+    .main-card .content-left {
+        position: relative;
+        height: 100%;
+        border-radius: 10px;
+        overflow: hidden;
+        background-color: #f6f6f6;
+    }
+
+    .main-card .content-left img {
+        width: inherit;
+        height: 100%;
+        -o-object-fit: cover;
+          object-fit: cover;
+        -o-object-position: center;
+          object-position: center;
+    }
+
+    .main-card .content-right {
+        position: relative;
+        width: calc(100% - 300px);
+        height: 100%;
+        padding-left: 35px;
+    }
+
+    .main-card .tag {
+        position: relative;
+        left: 100%;
+        transform: translateX(-100%);
+        width: -webkit-fit-content;
+        width: -moz-fit-content;
+        width: fit-content;
+        padding: 8px 25px;
+        border-radius: 10px;
+        background-color: #005AEE;
+    }
+
+    .main-card .tag h6 {
+        color: #fff;
+        font-size: .75em;
+        font-weight: 700;
+        letter-spacing: 2px;
+    }
+
+    .main-card .mini-imgs {
+        position: absolute;
+        display: flex;
+        bottom: 0;
+        height: 105px;
+    }
+
+    .main-card .mini-imgs img {
+        width: 105px;
+        height: 105px;
+        border-radius: 10px;
+        -o-object-fit: cover;
+          object-fit: cover;
+        -o-object-position: center;
+          object-position: center;
+        cursor: pointer;
+        transition: 300ms;
+    }
+
+    .main-card .mini-imgs img:hover {
+        opacity: .75;
+    }
+
+    .main-card .mini-imgs img:nth-child(2) {
+        margin: 0 10px;
+    }
+
+    /* Display this style when screen-width is lower than 992px */
+    @media only screen and (max-width: 992px) {
+
+        main {
+            display: flex;
+            justify-content: center;
+            align-items: start;
+            height: auto;
+            min-height: 100vh;
+            background-image: none;
+        }
+
+        .main-card {
+            position: relative;
+            width: 100%;
+            height: auto;
+            margin: 80px 20px;
+        }
+
+        .main-card .card-content {
+            flex-direction: column;
+        }
+
+        .main-card .content-left {
+            width: 100%;
+            height: 300px;
+        }
+
+        .main-card .content-right {
+            width: 100%;
+            height: auto;
+            padding: 175px 0 0;
+        }
+
+        .main-card .tag {
+            left: 0;
+            transform: translateX(0);
+        }
+
+        .main-card .mini-imgs {
+            position: absolute;
+            display: flex;
+            top: 0;
+            margin-top: 35px;
+            height: 105px;
+        }
+
+    }
+
+    /* Display this style when screen-width is lower than 500px */
+    @media only screen and (max-width: 500px) {
+
+        .main-card .content-left {
+          width: 100%;
+          height: 100%;
+        }
+
+        .main-card.content-left img {
+          width: inherit;
+          height: inherit;
+        }
+
+        .main-card {
+            margin: 120px 20px;
+        }
+
+        .main-card .card-content {
+            padding: 25px;
+        }
+
+        .main-card .content-right {
+            width: 100%;
+            height: auto;
+            padding: 115px 0 0;
+        }
+
+        .main-card .mini-imgs {
+            margin-top: 20px;
+        }
+
+        .main-card .mini-imgs img {
+            width: 60px;
+            height: 60px;
+        }
+
+    }
+
+    /* Just Copy The Code Above */
+    /* ======================== */
+
+    /* ----------- */
+    /* UI Designer */
+    /* ----------- */
+
+    .designer {
+        position: absolute;
+        top: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        font-weight: 400;
+        color: #46a2b9;
+        letter-spacing: 1px;
+        text-align: center;
+        text-transform: uppercase;
+    }
+
+    .designer a {
+        text-decoration: none;
+        color: #23515d;
+    }
+
+    .main-card_below {
+        position: absolute;
+        bottom: 20px;
+        width: 450px;
+        height: 90px;
+        margin: 20px;
+        border-radius: 10px;
+        font-family: 'neuzeit-grotesk', sans-serif;
+        font-weight: 300;
+        font-style: normal;
+        font-size: 1em;
+        line-height: 1.5;
+        color: #303336;
+        background-color: #fff;
+        box-shadow: 0 40px 40px -20px #8fc7d544;
+    }
+
+  </style>
+
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<main>
+    <!-- ======================== -->
+    <!-- Just Copy The Code Below -->
+    <section class="main-card">
+        <div class="card-content">
+            <div class="content-left">
+                <img class="full-img" src="https://image.tmdb.org/t/p/w1280{{ movies.poster_path }}" alt="poster_image">
+            </div>
+            <div class="content-right">
+                <div class="tag"><a href="{% url 'movie_reviews' movies.id %}" alt="Mythrill"><h6>추천 영화</h6></a></div>
+                <div style="max-height: 100px; overflow-y: auto;">
+                    <h2>{{ movies.title }}</h2>
+                </div>
+                <div style="max-height: 200px; overflow-y: auto;">
+                    <p>{{ movies.overview }}</p>
+                </div>
+                <div class="mini-imgs">
+                    {% comment %} <img class="mini-img" src="https://image.tmdb.org/t/p/w1280{{ movies.poster_path }}" alt="backdrop_image" onclick="changeImg(1)">
+                    <img class="mini-img" src="https://image.tmdb.org/t/p/w1280{{ movies.poster_path }}" alt="backdrop_image" onclick="changeImg(2)">
+                    <img class="mini-img" src="https://image.tmdb.org/t/p/w1280{{ movies.backdrop_path }}" alt="backdrop_image" onclick="changeImg(3)"> {% endcomment %}
+
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Just Copy The Code Above -->
+    <section class="main-card_below">
+        <div class="below_header">
+            <h3>Where to watch</h3>
+        </div>
+        <div id="watch" style="display: flex;">
+            <section class="services" style="display: flex;">
+                <ul style="display: flex; flex-direction: row;">
+                    {% for movie in movies.providers.results.KR.flatrate %}
+                        <a href="{{ movies.providers.results.KR.link }}"><p>{{ movie.provider_name }}</p></a>
+                    {% empty %}
+                    <li class="result-item-none">검색 결과가 없습니다.</li>
+                    {% endfor %}
+                </ul>
+            </section>
+        </div>
+
+    </section>
+    <!-- ======================== -->
+    
+</main>
+
+<!-- UI Designer -->
+<h6 class="designer">This UI Kit is Designed by <a href="https://www.behance.net/jhanemilan" target="_blank">Hannah Milan</a></h6>
+<!-- partial -->
+  <script>
+    var fullImg = document.querySelector(".full-img");
+    var miniImg = document.querySelectorAll(".mini-img");
+
+    function changeImg(x) {
+
+        var targetImg = miniImg[x - 1];
+        var imgAttr = targetImg.getAttribute("src");
+
+        fullImg.setAttribute("src", imgAttr);
+
+    }
+  </script>
+
+</body>
+</html>

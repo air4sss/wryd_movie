@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ movie.title }}</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #1c1c1c;
+        color: #fff;
+        margin: 0;
+        padding: 0;
+    }
+    
+    .container {
+        position: relative;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+    }
+    
+    .background-image {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-size: cover;
+        background-position: center;
+        filter: blur(10px);
+        z-index: -1;
+    }
+    
+    .content {
+        display: flex;
+        flex-direction: row;
+        background-color: rgba(0, 0, 0, 0.7);
+        border-radius: 10px;
+        overflow: hidden;
+    }
+    
+    .poster {
+        flex: 1;
+        padding: 20px;
+    }
+    
+    .poster img {
+        width: 100%;
+        border-radius: 10px;
+    }
+    
+    .details {
+        flex: 2;
+        padding: 20px;
+    }
+    
+    .details h1 {
+        font-size: 2.5em;
+        margin: 0;
+    }
+    
+    .details h1 span {
+        font-size: 0.8em;
+        color: #ccc;
+    }
+    
+    .details .director {
+        font-size: 1.2em;
+        margin: 10px 0;
+    }
+    
+    .details .description {
+        font-size: 1em;
+        margin: 20px 0;
+    }
+    
+    .rating {
+        margin: 20px 0;
+    }
+    
+    .rating span {
+        font-size: 1.2em;
+    }
+    
+    .rating-bar {
+        width: 100%;
+        height: 10px;
+        background-color: #444;
+        border-radius: 5px;
+        overflow: hidden;
+        margin-top: 5px;
+    }
+    
+    .rating-fill {
+        height: 100%;
+        background-color: #ffcc00;
+    }
+    
+    .cast, .watch-options {
+        margin: 20px 0;
+    }
+    
+    .cast h2, .watch-options h2 {
+        font-size: 1.5em;
+        margin-bottom: 10px;
+    }
+    
+    .cast ul {
+        display: flex;
+        overflow-x: auto;
+        white-space: nowrap;
+        padding: 0;
+        list-style: none;
+    }
+    
+    .cast li {
+        display: inline-block;
+        margin: 5px;
+    }
+    
+    .cast li.card {
+        flex: 0 0 auto;
+    }
+    
+    .watch-options ul {
+        list-style: none;
+        padding: 0;
+    }
+    
+    .watch-options li {
+        font-size: 1em;
+        margin: 5px 0;
+    }
+    
+    .watch-options a {
+        color: #ffcc00;
+        text-decoration: none;
+    }
+    
+    .watch-options a:hover {
+        text-decoration: underline;
+    }
+    .tag {
+        width: 90px;
+        float: right;
+        background-color: #ffcc00;
+        text-align: center;
+        padding: 5px 10px;
+        border-radius: 5px;
+        font-weight: bold;
+    }
+    .logo {
+        width: 30px;
+        height: 30px;
+        padding: 5px;
+        border-radius: 20px;
+    }
+    .sub_text {
+        font-size: 0.8em;
+        color: #ccc;
+    }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="background-image" style="background-image: url('{{ movie.backdrop_path }}');"></div>
+        <div class="content">
+            <div class="poster">
+                <img class="full-img" src="https://image.tmdb.org/t/p/w1280{{ movies.poster_path }}" alt="poster_image">
+            </div>
+            <div class="details" style="width: 100px;">
+                <h1>{{ movies.title }} <span>({{ movies.release_date }})</span></h1>
+                <p class="director">Directed by {{ movies.production_companies.0.name }}</p>
+                <p class="description">{{ movies.description }}</p>
+                <div class="rating" data-vote-average="{{ movies.vote_average }}">
+                    <span>평점 : {{ movies.vote_average }}</span>
+                    <div class="rating-bar">
+                        <div class="rating-fill"></div>
+                    </div>
+                </div>
+                <div class="cast">
+                    <h2>주요 출연진</h2>
+                    <div id="cast_scroller">
+                        <ol class="people scroller" style="display: flex; overflow-x: auto; white-space: nowrap; padding: 0; list-style: none;">
+                            {% for cast in movies.credits.cast|slice:":10" %}
+                                <li style="display: inline-block; margin: 5px;">
+                                    <a href="https://www.themoviedb.org/person/{{ cast.id }}" style="text-decoration: none; color: #fff;">
+                                        <div>
+                                          {% if cast.profile_path %}
+                                            <img loading="lazy" src="https://media.themoviedb.org/t/p/w138_and_h175_face{{ cast.profile_path }}" srcset="https://media.themoviedb.org/t/p/w138_and_h175_face{{ cast.profile_path }} 1x, https://media.themoviedb.org/t/p/w276_and_h350_face{{ cast.profile_path }} 2x" alt="{{ cast.name }}">
+                                          {% else %}
+                                            <div style="width: 138px; height: 175px; background-color: #444; display: flex; align-items: center; justify-content: center; color: #fff;">
+                                                이미지 없음
+                                            </div>
+                                          {% endif %}
+                                        </div>
+                                    </a>
+                                    <p style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" style="text-decoration: none; color: #fff;">
+                                        <a href="https://www.themoviedb.org/person/{{ cast.id }}" style="text-decoration: none; color: #fff;">{{ cast.name }}</a>
+                                    </p>
+                                    <p class="character" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-size: 0.7em;">
+                                        {{ cast.character }}
+                                    </p>
+                                </li>
+                            {% endfor %}
+                            <li style="display: inline-block; margin: 50px; font-size: 1.5em;">
+                              <p><a href="https://www.themoviedb.org/movie/{{ movies.id }}/cast" style="color: #fff; text-decoration: none;">See More <span></span></a></p>
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+                <div class="tag"><a href="{% url 'movie_reviews' movies.id %}" style="color: black; text-decoration: none;">추천영화</a></div>
+                <div class="watch-options">
+                    <h2>여기서 볼 수 있어요</h2>
+                    <ul style="display: flex; flex-wrap: wrap;">
+                        {% if "flatrate" in movies.providers.results.KR or "rent" in movies.providers.results.KR or "buy" in movies.providers.results.KR %}
+                            {% if "flatrate" in movies.providers.results.KR %}
+                                <li style="margin-right: 20px;">
+                                    <p class="sub_text">스트리밍</p>
+                                    {% for movie in movies.providers.results.KR.flatrate %}
+                                        <a href="{{ movie.link }}"><img class="logo" src="https://media.themoviedb.org/t/p/original{{ movie.logo_path }}" alt="{{ movie.provider_name }}"></a>
+                                    {% endfor %}
+                                </li>
+                                <li class="line" style="height: 50px; border-left: 1px solid #ccc; margin-top: 30px; padding-right: 20px;"></li>
+                            {% endif %}
+
+                            {% if "rent" in movies.providers.results.KR %}
+                                <li style="margin-right: 20px;">
+                                    <p class="sub_text">대여</p>
+                                    {% for movie in movies.providers.results.KR.rent %}
+                                        <a href="{{ movie.link }}"><img class="logo" src="https://media.themoviedb.org/t/p/original{{ movie.logo_path }}" alt="{{ movie.provider_name }}"></a>
+                                    {% endfor %}
+                                </li>
+                                <li class="line" style="height: 50px; border-left: 1px solid #ccc; margin-top: 30px; padding-right: 20px;"></li>
+                            {% endif %}
+
+                            {% if "buy" in movies.providers.results.KR %}
+                                <li style="margin-right: 20px;">
+                                    <p class="sub_text">구매</p>
+                                    {% for movie in movies.providers.results.KR.buy %}
+                                        <a href="{{ movie.link }}"><img class="logo" src="https://media.themoviedb.org/t/p/original{{ movie.logo_path }}" alt="{{ movie.provider_name }}"></a>
+                                    {% endfor %}
+                                </li>
+                            {% endif %}
+                        {% else %}
+                            <li style="margin-right: 20px;">
+                                <p style="color: #fff; font-size: 1.1em;">이 영화는 현재 이용 가능한 스트리밍, 대여 또는 구매 옵션이 없습니다 😰</p>
+                            </li>
+                        {% endif %}
+                    </ul>
+                </div>
+                {% comment %} rent buy {% endcomment %}
+            </div>
+        </div>
+    </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var ratingElement = document.querySelector('.rating');
+            var voteAverage = parseFloat(ratingElement.getAttribute('data-vote-average'));
+            var ratingFillElement = ratingElement.querySelector('.rating-fill');
+            var widthPercentage = voteAverage * 10;
+            ratingFillElement.style.width = widthPercentage + '%';
+        });
+    </script>
+</body>
+</html>
