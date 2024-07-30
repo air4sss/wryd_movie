@@ -1,6 +1,6 @@
 # wryd_movie
 
-![Project Logo]([https://via.placeholder.com/150](https://github.com/air4sss/wryd_movie/blob/main/logo_rmbg.jpg))
+![Project Logo]([https://github.com/air4sss/wryd_movie/blob/main/logo_rmbg.jpg])
 
 ![Build Status](https://img.shields.io/badge/build-passing-brightgreen)
 
