@@ -43,4 +43,4 @@
 - SQLite를 사용한 사용자 및 영화 데이터 저장 및 관리
 
 ## Figma 기반 목업 겸 슬라이드 쇼
-[여기서 확인하세요 🤩](https://www.figma.com/proto/cE301JyFV9TMe70OFZq96A/Wireframe?node-id=10-1624&t=i1KRaJX7Q5vgMXrC-1)
+[여기서 확인하세요 🤩](https://www.figma.com/proto/cE301JyFV9TMe70OFZq96A/Wireframe?node-id=10-1391&t=i1KRaJX7Q5vgMXrC-1)
